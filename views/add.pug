@@ -1,0 +1,27 @@
+extends layout
+
+block content
+	if eventAdded=='local'
+		h2 Your local event (#{eventName}) has been successfully added. It is now awaiting admin approval
+	h1 Add Event or Social Link
+	hr
+	h2 Add Local
+	form(name='localForm' action='/add' method='post')
+		input(type='hidden' name='type' value='local')
+		p
+			label Event Name
+			input(type='text' name='eventName' required)
+		p
+			label Frequency
+			select(name='frequency' required)
+				option(value='weekly') Weekly
+				option(value='biweekly') Biweekly
+		p
+			label Start Date
+			input(type='date' name='startDate' required)
+		p
+			label Event Description
+			br
+			textarea(name='description' required)
+		p
+			input(type='submit' value='Add Local')

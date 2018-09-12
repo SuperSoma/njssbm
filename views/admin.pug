@@ -1,0 +1,13 @@
+extends layout
+
+block content
+	h1 Admin Panel
+	hr
+	h2 Locals
+		h3 Approved Locals
+		h3 Pending Locals
+		div(style='margin-left:20px;')
+			each local in pendingLocals
+				p= local.eventName
+	h2 Events
+	h2 Social Media

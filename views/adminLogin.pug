@@ -1,0 +1,6 @@
+extends layout
+
+block content
+	form(name='adminLogin' action='/admin' method='post')
+		input(type='password' name='adminPW')
+		input(type='submit' value='login')
