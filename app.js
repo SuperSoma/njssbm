@@ -42,7 +42,11 @@ app.use('/', indexRouter);
 app.use('/admin', adminRouter);
 app.use('/add', addRouter);
 
-
+//error
+const handleError = function() {
+    console.error(err);
+    // handle your error
+};
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -5,9 +5,11 @@ var locals = require('../models/localModel.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	locals.find( {active : true}).select('eventName').exec(function (err, pLoc) {
-		if (err) return handleError(err);
-		res.render('admin', {locals : pLoc});
+	
+	locals.getLocals(function (err, pLoc) {
+		if (err) return console.log(err);
+		console.log(pLoc);
+		res.render('index', {beans : pLoc});
 	});
 });
 
