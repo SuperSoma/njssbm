@@ -13,7 +13,7 @@ var addRouter = require('./routes/add');
 var app = express();
 
 //set up database
-mongoose.connect('mongodb://127.0.0.1/njssbm',{ useNewUrlParser: true });
+mongoose.connect('mongodb://nickz:sc00terj@ds161322.mlab.com:61322/heroku_4vsk7dcm',{ useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 var db = mongoose.connection;
