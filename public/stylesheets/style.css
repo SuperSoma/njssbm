@@ -7,6 +7,11 @@ a {
   color: #00B7FF;
 }
 
-label {
-	padding-right : 10px;
+label{
+	padding-right : 0px;
+	padding-left: 20px
+}
+
+input, textarea, select {
+	margin-left : 15px;
 }

@@ -5,9 +5,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var socialSchema = new Schema({
-	_id : Schema.Types.ObjectId,
 	pageName : String,
-	pageType : {type:String, 'enum' : ['Facebook', 'Twitter', 'Twitch', 'Mixer', 'YouTube']},
+	pageType : {type:String, 'enum' : ['Facebook', 'Twitter', 'Instagram', 'Twitch', 'Mixer', 'YouTube']},
 	url : String,
 	active : {type:Boolean, default : false}
 });

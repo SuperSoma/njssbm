@@ -2,7 +2,11 @@ extends layout
 
 block content
 	if eventAdded=='local'
-		h2 Your local event (#{eventName}) has been successfully added. It is now awaiting admin approval
+		h2 Your local event, (#{eventName}), has been successfully added. It is now awaiting admin approval
+	if eventAdded=='event'
+		h2 Your big event, (#{eventName}), has been successfully added. It is now awaiting admin approval
+	if eventAdded=='social'
+		h2 Your social link, (#{eventName}), has been successfully added. It is now awaiting admin approval
 	h1 Add Event or Social Link
 	hr
 	h2 Add Local
@@ -25,3 +29,43 @@ block content
 			textarea(name='description' required)
 		p
 			input(type='submit' value='Add Local')
+	hr
+	h2 Add Event
+	form(name='localForm' action='/add' method='post')
+		input(type='hidden' name='type' value='event')
+		p
+			label Event Name
+			input(type='text' name='eventName' required)
+		p
+			label Start Date
+			input(type='date' name='startDate' required)
+		p
+			label Page Link (FB, etc)
+			input(type='date' name='page' required)
+		p
+			label Event Description
+			br
+			textarea(name='description' required)
+		p
+			input(type='submit' value='Add Event')
+	hr
+	h2 Add Social Link
+	form(name='localForm' action='/add' method='post')
+		input(type='hidden' name='type' value='social')
+		p
+			label Page Name
+			input(type='text' name='pageName' required)
+		p
+			label Page Link (FB, etc)
+			input(type='text' name='page' required)
+		p
+			label Link Type
+			select(name='frequency' required)
+				option(value='Facebook') Facebook
+				option(value='Twitter') Twitter
+				option(value='Instagram') Instagram
+				option(value='Twitch') Twitch
+				option(value='Mixer') Mixer
+				option(value='YouTube') YouTube
+		p
+			input(type='submit' value='Add Social Link')

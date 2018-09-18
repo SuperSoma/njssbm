@@ -5,12 +5,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var eventSchema = new Schema({
-	_id : Schema.Types.ObjectId,
 	eventName : String,
 	date : Date,
 	pageLink : String,
-	time : String,
-	events : [{game:String,time:String}],
+	//time : String,
+	//events : [{game:String,time:String}],
 	description : String,
 	active : {type:Boolean, default : false}
 });

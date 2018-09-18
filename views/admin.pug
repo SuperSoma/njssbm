@@ -3,11 +3,85 @@ extends layout
 block content
 	h1 Admin Panel
 	hr
-	h2 Locals
-		h3 Approved Locals
-		h3 Pending Locals
-		div(style='margin-left:20px;')
-			each local in pendingLocals
-				p= local.eventName
-	h2 Events
-	h2 Social Media
+	form(name='adminPanel' action='/admin' method='post')
+		input(type='hidden' name='updateStuff' value='true')
+		h2 Locals
+			h3(style='margin-left:20px;') Approved Locals
+			div(style='margin-left:40px;')
+				each local in aLocals
+					p 
+						span #{local.eventName}		
+						span
+							label Delete
+							input(type='radio' name='local['+local._id+']' value='delete')
+						span
+							label Nothing
+							input(type='radio' name='local['+local._id+']' value='nothing')
+			h3(style='margin-left:20px;') Pending Locals
+			div(style='margin-left:40px;')
+				each local in pLocals
+					p 
+						span #{local.eventName}
+						span
+							label Approve
+							input(type='radio' name='local['+local._id+']' value='approve')
+						span
+							label Delete
+							input(type='radio' name='local['+local._id+']' value='delete')
+						span
+							label Nothing
+							input(type='radio' name='local['+local._id+']' value='nothing')
+		h2 Events
+			h3(style='margin-left:20px;') Approved Events
+			div(style='margin-left:40px;')
+				each local in aEvents
+					p 
+						strong #{local.eventName}		
+						span
+							label Delete
+							input(type='radio' name='event['+local._id+']' value='delete')
+						span
+							label Nothing
+							input(type='radio' name='event['+local._id+']' value='nothing')
+			h3(style='margin-left:20px;') Pending Events
+			div(style='margin-left:40px;')
+				each local in pEvents
+					p 
+						span #{local.eventName}
+						span
+							label Approve
+							input(type='radio' name='event['+local._id+']' value='approve')
+						span(style='margin-left:20px;')
+							label Delete
+							input(type='radio' name='event['+local._id+']' value='delete')
+						span(style='margin-left:20px;')
+							label Nothing
+							input(type='radio' name='event['+local._id+']' value='nothing')
+		h2 Social Media
+			h3(style='margin-left:20px;') Approved Events
+			div(style='margin-left:40px;')
+				each local in aSocial
+					p 
+						span #{local.eventName}		
+						span
+							label Delete
+							input(type='radio' name='social['+local._id+']' value='delete')
+						span
+							label Nothing
+							input(type='radio' name='social['+local._id+']' value='nothing')
+			h3(style='margin-left:20px;') Pending Events
+			div(style='margin-left:40px;')
+				each local in pSocial
+					p 
+						span #{local.pageName} - #{local.url}
+						span
+							label Approve
+							input(type='radio' name='social['+local._id+']' value='approve')
+						span
+							label Delete
+							input(type='radio' name='social['+local._id+']' value='delete')
+						span
+							label Nothing
+							input(type='radio' name='social['+local._id+']' value='nothing')
+		input(type='password' name='adminPW')
+		input(type='submit' value='Submit')
