@@ -16,7 +16,7 @@ block content
 							input(type='radio' name='local['+local._id+']' value='delete')
 						span
 							label Nothing
-							input(type='radio' name='local['+local._id+']' value='nothing')
+							input(type='radio' name='local['+local._id+']' value='nothing' checked)
 			h3(style='margin-left:20px;') Pending Locals
 			div(style='margin-left:40px;')
 				each local in pLocals
@@ -30,7 +30,7 @@ block content
 							input(type='radio' name='local['+local._id+']' value='delete')
 						span
 							label Nothing
-							input(type='radio' name='local['+local._id+']' value='nothing')
+							input(type='radio' name='local['+local._id+']' value='nothing' checked)
 		h2 Events
 			h3(style='margin-left:20px;') Approved Events
 			div(style='margin-left:40px;')
@@ -42,7 +42,7 @@ block content
 							input(type='radio' name='event['+local._id+']' value='delete')
 						span
 							label Nothing
-							input(type='radio' name='event['+local._id+']' value='nothing')
+							input(type='radio' name='event['+local._id+']' value='nothing' checked)
 			h3(style='margin-left:20px;') Pending Events
 			div(style='margin-left:40px;')
 				each local in pEvents
@@ -56,7 +56,7 @@ block content
 							input(type='radio' name='event['+local._id+']' value='delete')
 						span(style='margin-left:20px;')
 							label Nothing
-							input(type='radio' name='event['+local._id+']' value='nothing')
+							input(type='radio' name='event['+local._id+']' value='nothing' checked)
 		h2 Social Media
 			h3(style='margin-left:20px;') Approved Events
 			div(style='margin-left:40px;')
@@ -68,7 +68,7 @@ block content
 							input(type='radio' name='social['+local._id+']' value='delete')
 						span
 							label Nothing
-							input(type='radio' name='social['+local._id+']' value='nothing')
+							input(type='radio' name='social['+local._id+']' value='nothing' checked)
 			h3(style='margin-left:20px;') Pending Events
 			div(style='margin-left:40px;')
 				each local in pSocial
@@ -82,6 +82,6 @@ block content
 							input(type='radio' name='social['+local._id+']' value='delete')
 						span
 							label Nothing
-							input(type='radio' name='social['+local._id+']' value='nothing')
+							input(type='radio' name='social['+local._id+']' value='nothing' checked)
 		input(type='password' name='adminPW')
 		input(type='submit' value='Submit')
