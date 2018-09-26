@@ -22,13 +22,13 @@ localSchema.statics.getLocals = function(cb) {
 			for (var i=0; i < 7; i++) {
 				darts.push(Math.abs(Date.UTC((new Date()).getFullYear(), (new Date()).getMonth(), (new Date()).getDate() + i)));
 			}
-			var a = ((((darts[0]  / 1000)- this.startDate) % this.frequency == 0));
-			var b = ((((darts[1]  / 1000)- this.startDate) % this.frequency == 0));
-			var c = ((((darts[2] / 1000) - this.startDate) % this.frequency == 0));
-			var d = ((((darts[3] / 1000)- this.startDate)  % this.frequency == 0));
-			var e = ((((darts[4]  / 1000)- this.startDate) % this.frequency == 0));
-			var f = ((((darts[5] / 1000) - this.startDate) % this.frequency == 0));
-			var g = ((((darts[6]  / 1000) - this.startDate)% this.frequency == 0));
+			var a = ((((darts[0]  / 1000)- this.startDate) % this.frequency == 0)) && ((darts[0]  / 1000) >= this.startDate);
+			var b = ((((darts[1]  / 1000)- this.startDate) % this.frequency == 0)) && ((darts[1]  / 1000) >= this.startDate);
+			var c = ((((darts[2] / 1000) - this.startDate) % this.frequency == 0)) && ((darts[2]  / 1000) >= this.startDate);
+			var d = ((((darts[3] / 1000)- this.startDate)  % this.frequency == 0)) && ((darts[3]  / 1000) >= this.startDate);
+			var e = ((((darts[4]  / 1000)- this.startDate) % this.frequency == 0)) && ((darts[4]  / 1000) >= this.startDate);
+			var f = ((((darts[5] / 1000) - this.startDate) % this.frequency == 0)) && ((darts[5]  / 1000) >= this.startDate);
+			var g = ((((darts[6]  / 1000) - this.startDate)% this.frequency == 0)) && ((darts[6]  / 1000) >= this.startDate);
 			return a || b || c || d || e || f || g;
 		}
 	},cb)
