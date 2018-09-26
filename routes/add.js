@@ -11,10 +11,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/',function(req, res, next) {
+	var name = ""
 	if (req.body.type == "local") {
 		var d = new Date(req.body.startDate).getTime();
 		var unixDateTime =Math.round(d / 1000)
 		var fr = req.body.frequency == "weekly" ? 604800 : 1209600;
+		name = req.body.eventName;
 		locals.create({
 			eventName : req.body.eventName,
 			frequency : fr,
@@ -24,20 +26,22 @@ router.post('/',function(req, res, next) {
 	} else if(req.body.type == "event") {
 		var d = new Date(req.body.startDate).getTime();
 		var unixDateTime =Math.round(d / 1000);
-		locals.create({
+		name = req.body.eventName;
+		events.create({
 			eventName : req.body.eventName,
-			startDate : unixDateTime,
+			date : unixDateTime,
 			pageLink : req.body.page,
 			description : req.body.description
 		});
 	} else if(req.body.type == "social") {
+		name = req.body.pageName
 		social.create({
 			pageName : req.body.pageName,
 			pageType : req.body.frequency,
 			url : req.body.page
 		});
 	}
-  res.render('add', {eventAdded : req.body.type, eventName : req.body.eventName, date : req.body.startDate } );
+  res.render('add', {eventAdded : req.body.type, eventName : name, date : req.body.startDate } );
 });
 
 module.exports = router;
