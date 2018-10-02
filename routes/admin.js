@@ -13,9 +13,26 @@ var lastSunday = new Date(today.setDate(today.getDate()-today.getDay()));
 var lastSundayTimestamp = lastSunday.getTime();
 */
 
+const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+function getMonth(month) {
+	return monthNames[month];
+}
+
+function getDay(d) {
+	return dayOfWeek[d];
+}
+
 function renderAdminPage(req, res, next) {
 	locals.find( ).exec(function (err, locs) {
-			events.find().exec(function(err, evs) {
+			events.find({
+				$where : function() {
+					return (this.date * 1000) >= (Date.UTC((new Date()).getFullYear(), (new Date()).getMonth(), (new Date()).getDate()))
+				}
+			}).exec(function(err, evs) {
 				social.find().exec(function(err, soc) {
 					if (err) console.log(err);
 					var args = {
@@ -27,6 +44,7 @@ function renderAdminPage(req, res, next) {
 						pSocial : []
 					};
 					for(var i=0;i < locs.length; i++) {
+						locs[i].dayOfWeek = getDay(new Date(locs[i].startDate * 1000).getUTCDay());
 						if(locs[i].active == false) {
 							args.pLocals.push(locs[i]);
 						} else {
@@ -34,6 +52,7 @@ function renderAdminPage(req, res, next) {
 						}
 					}
 					for(var i=0;i < evs.length; i++) {
+						evs[i].eventDay = getDay(new Date(evs[i].date * 1000).getUTCDay()) + ", " + getMonth(new Date(evs[i].date * 1000).getUTCMonth()) + " " + new Date(evs[i].date * 1000).getUTCDate() + ", " + new Date(evs[i].date * 1000).getUTCFullYear();
 						if(evs[i].active == false) {
 							args.pEvents.push(evs[i]);
 						} else {
@@ -70,7 +89,11 @@ router.post('/', function(req, res, next) {
 		
 			switch(req.body.local[key]) {
 				case 'approve':
-				locals.update({"_id" : ObjectId(key)}, {active: true}, {}, function(err,doc) {if (err) {console.log(err)}});
+				locals.update({"_id" : key}, {active: true}, {}, function(err,doc) {if (err) {console.log(err)}});
+				break;
+				
+				case 'deactivate':
+				locals.update({"_id" : key}, {active: false}, {}, function(err,doc) {if (err) {console.log(err)}});
 				break;
 				
 				case 'delete':
@@ -82,11 +105,15 @@ router.post('/', function(req, res, next) {
 		for (var key in req.body.event) {
 			switch(req.body.event[key]) {
 				case 'approve':
-				events.update({"_id" : ObjectId(key)}, {active: true}, {},function(err,doc) {if (err) {console.log(err)}});
+				events.update({"_id" : key}, {active: true}, {},function(err,doc) {if (err) {console.log(err)}});
 				break;
 				
+				case 'deactivate':
+				events.update({"_id" : key}, {active: false}, {}, function(err,doc) {if (err) {console.log(err)}});
+				break;
+								
 				case 'delete':
-				events.remove({"_id" : ObjectId(key)}, function(err,doc) {if (err) {console.log(err)}});
+				events.remove({"_id" : key}, function(err,doc) {if (err) {console.log(err)}});
 				break;
 			}
 		}
@@ -94,11 +121,11 @@ router.post('/', function(req, res, next) {
 		for (var key in req.body.social) {
 			switch(req.body.social[key]) {
 				case 'approve':
-				social.update({"_id" : ObjectId(key)}, {active: true}, {},function(err,doc) {if (err) {console.log(err)}});
+				social.update({"_id" : key}, {active: true}, {},function(err,doc) {if (err) {console.log(err)}});
 				break;
 				
 				case 'delete':
-				social.remove({"_id" : ObjectId(key)}, function(err,doc) {if (err) {console.log(err)}});
+				social.remove({"_id" : key}, function(err,doc) {if (err) {console.log(err)}});
 				break;
 			}
 		}

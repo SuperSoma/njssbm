@@ -1,90 +1,129 @@
-doctype html
-html
-	head
-		title= title
-		link(rel='stylesheet', href='/stylesheets/style.css')
-	body
-		h1 Admin Panel
-		hr
-		form(name='adminPanel' action='/admin' method='post')
-			input(type='hidden' name='updateStuff' value='true')
-			h2 Locals
-				h3(style='margin-left:20px;') Approved Locals
-				div(style='margin-left:40px;')
-					each local in aLocals
-						p 
-							strong #{local.eventName}		
-							span
-								label Delete
-								input(type='radio' name='local['+local._id+']' value='delete')
-							span
-								label Nothing
-								input(type='radio' name='local['+local._id+']' value='nothing' checked)
-				h3(style='margin-left:20px;') Pending Locals
-				div(style='margin-left:40px;')
-					each local in pLocals
-						p 
-							strong #{local.eventName}
-							span
-								label Approve
-								input(type='radio' name='local['+local._id+']' value='approve')
-							span
-								label Delete
-								input(type='radio' name='local['+local._id+']' value='delete')
-							span
-								label Nothing
-								input(type='radio' name='local['+local._id+']' value='nothing' checked)
-			h2 Events
-				h3(style='margin-left:20px;') Approved Events
-				div(style='margin-left:40px;')
-					each local in aEvents
-						p 
-							strong #{local.eventName}		
-							span
-								label Delete
-								input(type='radio' name='event['+local._id+']' value='delete')
-							span
-								label Nothing
-								input(type='radio' name='event['+local._id+']' value='nothing' checked)
-				h3(style='margin-left:20px;') Pending Events
-				div(style='margin-left:40px;')
-					each local in pEvents
-						p 
-							span #{local.eventName}
-							span
-								label Approve
-								input(type='radio' name='event['+local._id+']' value='approve')
-							span(style='margin-left:20px;')
-								label Delete
-								input(type='radio' name='event['+local._id+']' value='delete')
-							span(style='margin-left:20px;')
-								label Nothing
-								input(type='radio' name='event['+local._id+']' value='nothing' checked)
-			h2 Social Media
-				h3(style='margin-left:20px;') Approved Social Links
-				div(style='margin-left:40px;')
-					each local in aSocial
-						p 
-							strong #{local.pageName} - #{local.pageType} - #{local.url}	
-							span
-								label Delete
-								input(type='radio' name='social['+local._id+']' value='delete')
-							span
-								label Nothing
-								input(type='radio' name='social['+local._id+']' value='nothing' checked)
-				h3(style='margin-left:20px;') Pending Social Links
-				div(style='margin-left:40px;')
-					each local in pSocial
-						p 
-							strong #{local.pageName} - #{local.url}
-							span
-								label Approve
-								input(type='radio' name='social['+local._id+']' value='approve')
-							span
-								label Delete
-								input(type='radio' name='social['+local._id+']' value='delete')
-							span
-								label Nothing
-								input(type='radio' name='social['+local._id+']' value='nothing' checked)
-			input(type='password' name='adminPW')
-			input(type='submit' value='Submit')
+extends layout
+
+block content
+	h1 Admin Panel
+	hr
+	form(name='adminPanel' action='/admin' method='post')
+		input(type='hidden' name='updateStuff' value='true')
+		h3 Locals
+			h4(style='margin-left:20px;') Approved Locals
+			div(style='margin-left:40px;' class="row")
+				each local in aLocals
+					div(class="col-md-3" style="display:inline-block")
+						div(class="card border-dark mb-3" style="margin-top:10px;")
+							div(class="card-header") #{local.eventName}
+							div(class="card-body")
+								p
+									strong Day of the week 
+									span - #{local.dayOfWeek}
+								pre #{local.description}
+							p(style="border-top:1px solid rgba(0, 0, 0, 0.125);padding-top:5px;") 		
+								span
+									label Deactivate
+									input(type='radio' name='local['+local._id+']' value='deactivate' style='margin-left:5px;')
+								span
+									label Delete
+									input(type='radio' name='local['+local._id+']' value='delete' style='margin-left:5px;')
+								span
+									label Nothing
+									input(type='radio' name='local['+local._id+']' value='nothing' style='margin-left:5px;' checked)
+			h4(style='margin-left:20px;') Pending Locals
+			div(style='margin-left:40px;' class='row')
+				each local in pLocals
+					div(class="col-md-3" style="display:inline-block")
+						div(class="card border-dark mb-3" style="margin-top:10px;")
+							div(class="card-header") #{local.eventName}
+							div(class="card-body")
+								p
+									strong Day of the week 
+									span - #{local.dayOfWeek}
+								pre #{local.description}
+							p(style="border-top:1px solid rgba(0, 0, 0, 0.125);padding-top:5px;") 		
+								span
+									label Approve
+									input(type='radio' name='local['+local._id+']' value='approve' style='margin-left:5px;')
+								span
+									label Delete
+									input(type='radio' name='local['+local._id+']' value='delete' style='margin-left:5px;')
+								span
+									label Nothing
+									input(type='radio' name='local['+local._id+']' value='nothing' style='margin-left:5px;' checked)
+		h3 Events
+			h4(style='margin-left:20px;') Approved Events
+			div(style='margin-left:40px;' class='row')
+				each local in aEvents
+					div(class="col-md-3" style="display:inline-block")
+						div(class="card border-dark mb-3" style="margin-top:10px;")
+							div(class="card-header") #{local.eventName}
+							div(class="card-body")
+								p
+									strong Event Date
+									span - #{local.eventDay}
+									br
+									a(href=local.pageLink target="_blank")
+										strong Page Link 
+								pre #{local.description}
+							p(style="border-top:1px solid rgba(0, 0, 0, 0.125);padding-top:5px;") 		
+								span
+									label Deactivate
+									input(type='radio' name='event['+local._id+']' value='deactivate' style='margin-left:5px;')
+								span
+									label Delete
+									input(type='radio' name='event['+local._id+']' value='delete' style='margin-left:5px;')
+								span
+									label Nothing
+									input(type='radio' name='event['+local._id+']' value='nothing' style='margin-left:5px;' checked)
+			h4(style='margin-left:20px;') Pending Events
+			div(style='margin-left:40px;' class='row')
+				each local in pEvents
+					div(class="col-md-3" style="display:inline-block")
+						div(class="card border-dark mb-3" style="margin-top:10px;")
+							div(class="card-header") #{local.eventName}
+							div(class="card-body")
+								p
+									strong Event Date
+									span - #{local.eventDay}
+									br
+									a(href=local.pageLink target="_blank")
+										strong Page Link 
+								pre #{local.description}
+							p(style="border-top:1px solid rgba(0, 0, 0, 0.125);padding-top:5px;") 		
+								span
+									label Approve
+									input(type='radio' name='event['+local._id+']' value='approve' style='margin-left:5px;')
+								span
+									label Delete
+									input(type='radio' name='event['+local._id+']' value='delete' style='margin-left:5px;')
+								span
+									label Nothing
+									input(type='radio' name='event['+local._id+']' value='nothing' style='margin-left:5px;' checked)
+		h3 Social Media
+		div(class='row' style='margin-left:40px;')
+			div(class='col-md-6')
+				h4() Approved Social Links
+				each local in aSocial
+					p 
+						strong #{local.pageName} - #{local.pageType} - #{local.url}	
+						span
+							label Delete
+							input(type='radio' name='social['+local._id+']' value='delete')
+						span
+							label Nothing
+							input(type='radio' name='social['+local._id+']' value='nothing' checked)
+			div(class='col-md-6')
+				h4() Pending Social Links
+				each local in pSocial
+					p 
+						strong #{local.pageName} - #{local.url}
+						span
+							label Approve
+							input(type='radio' name='social['+local._id+']' value='approve')
+						span
+							label Delete
+							input(type='radio' name='social['+local._id+']' value='delete')
+						span
+							label Nothing
+							input(type='radio' name='social['+local._id+']' value='nothing' checked)
+		input(type='password' name='adminPW')
+		input(type='submit' value='Submit')
+		div(style='height:50px;')
