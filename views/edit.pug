@@ -1,0 +1,71 @@
+extends layout
+
+block content
+	h1 Edit Event or Social Link
+	hr
+	if type == 'local'
+		h2 Edit Local
+		form(name='localForm' action='/edit' method='post')
+			input(type='hidden' name='type' value='local')
+			input(type='hidden' name='id' value=data.id)
+			p
+				label Event Name
+				input(type='text' name='eventName' value=data.eventName required)
+			p
+				label Frequency
+				select(name='frequency' value=data.frequencyReal required)
+					option(value='weekly') Weekly
+					option(value='biweekly') Biweekly
+			p
+				label Start Date
+				input(type='date' name='startDate' value=data.startDate required)
+			p
+				label Event Description
+				br
+				textarea(name='description' value=data.description required)
+			p
+				input(type='submit' value='Edit Local')
+		hr
+	elseif type == 'local'
+		h2 Edit Event
+		form(name='localForm' action='/edit' method='post')
+			input(type='hidden' name='type' value='event')
+			p
+				label Event Name
+				input(type='text' name='eventName' required)
+			p
+				label Start Date
+				input(type='date' name='startDate' required)
+			p
+				label Page Link (FB, etc)
+				input(type='text' name='page' required)
+			p
+				label Event Description
+				br
+				textarea(name='description' required)
+			p
+				input(type='submit' value='Edit Event')
+		hr
+	elseif type == 'social'
+		h2 Edit Social Link
+		form(name='localForm' action='/edit' method='post')
+			input(type='hidden' name='type' value='social')
+			p
+				label Page Name
+				input(type='text' name='pageName' required)
+			p
+				label Page Link (FB, etc)
+				input(type='text' name='page' required)
+			p
+				label Link Type
+				select(name='frequency' required)
+					option(value='Facebook') Facebook
+					option(value='Twitter') Twitter
+					option(value='Instagram') Instagram
+					option(value='Twitch') Twitch
+					option(value='Mixer') Mixer
+					option(value='YouTube') YouTube
+			p
+				input(type='submit' value='Add Social Link')
+	else
+		h1 Someone messed up >:(

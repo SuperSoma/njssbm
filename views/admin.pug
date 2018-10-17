@@ -11,7 +11,9 @@ block content
 				each local in aLocals
 					div(class="col-md-3" style="display:inline-block")
 						div(class="card border-dark mb-3" style="margin-top:10px;")
-							div(class="card-header") #{local.eventName}
+							div(class="card-header") 
+								span #{local.eventName} - 
+								a(href='/edit/local/'+local._id) Edit
 							div(class="card-body")
 								p
 									strong Day of the week 
@@ -32,7 +34,9 @@ block content
 				each local in pLocals
 					div(class="col-md-3" style="display:inline-block")
 						div(class="card border-dark mb-3" style="margin-top:10px;")
-							div(class="card-header") #{local.eventName}
+							div(class="card-header") 
+								span #{local.eventName} - 
+								a(href='/edit/local/'+local._id) Edit
 							div(class="card-body")
 								p
 									strong Day of the week 
@@ -54,7 +58,9 @@ block content
 				each local in aEvents
 					div(class="col-md-3" style="display:inline-block")
 						div(class="card border-dark mb-3" style="margin-top:10px;")
-							div(class="card-header") #{local.eventName}
+							div(class="card-header") 
+								span #{local.eventName} - 
+								a(href='/edit/event/'+local._id) Edit
 							div(class="card-body")
 								p
 									strong Event Date
@@ -78,7 +84,9 @@ block content
 				each local in pEvents
 					div(class="col-md-3" style="display:inline-block")
 						div(class="card border-dark mb-3" style="margin-top:10px;")
-							div(class="card-header") #{local.eventName}
+							div(class="card-header") 
+								span #{local.eventName} - 
+								a(href='/edit/event/'+local._id) Edit
 							div(class="card-body")
 								p
 									strong Event Date
@@ -110,6 +118,8 @@ block content
 						span
 							label Nothing
 							input(type='radio' name='social['+local._id+']' value='nothing' checked)
+						span(style='margin-left:15px;')
+							a(href='/edit/social/'+local._id) Edit
 			div(class='col-md-6')
 				h4() Pending Social Links
 				each local in pSocial
@@ -124,5 +134,7 @@ block content
 						span
 							label Nothing
 							input(type='radio' name='social['+local._id+']' value='nothing' checked)
+						span(style='margin-left:15px;')
+							a(href='/edit/social/'+local._id) Edit
 		input(type='submit' value='Submit')
 		div(style='height:50px;')

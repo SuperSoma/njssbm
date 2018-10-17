@@ -144,14 +144,37 @@ router.post('/', function(req, res, next) {
 	}
 });
 
-router.put('/', function(req, res, next) {
-		if (req.session.admin) {
-			console.log(req.body);
-			
-			renderAdminPage(req, res, next);
-		} else {
-			res.render('adminLogin');			
-		}
+function renderEditPage(req,res,next) {
+	
+}
+
+router.get("/edit/:type/:id", function(req, res, next) {
+	switch(req.params.type) {
+		case "local":
+		locals.findOne({"_id" : key}).exec(function(err,loc) {
+			if (err) console.log(err);
+			var data = {};
+			data.eventName = loc.eventName;
+			//data.frequency = loc.fre
+		});
+		break;
+		
+		case "event":
+		
+		break;
+		
+		case "social":
+		
+		break;
+		
+		default:
+			res.render('edit', {type:"blonko"});
+		break;
+	}
+});
+
+router.post("/edit/", function(req,res,next) {
+	
 });
 
 module.exports = router;
