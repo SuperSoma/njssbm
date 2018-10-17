@@ -75,13 +75,21 @@ function renderAdminPage(req, res, next) {
 
 /* GET list of events/links that require approval. */
 router.get('/', function(req, res, next) {
-	res.render('adminLogin');
+	if (!req.session.admin) {
+		res.render('adminLogin');
+	} else {
+		renderAdminPage(req,res,next);
+	}
 });
 
 router.post('/', function(req, res, next) {
-	if (req.body.adminPW == "njmelee" && typeof(req.body.updateStuff) == "undefined") {
+	if(req.body.adminPW == "njmelee") {
+		req.session.admin = true;
+	}
+	if (req.session.admin && typeof(req.body.updateStuff) == "undefined") {
 		renderAdminPage(req, res, next);
-	} else if (req.body.adminPW == "njmelee" && typeof(req.body.updateStuff) != "undefined") {
+
+	} else if (req.session.admin && typeof(req.body.updateStuff) != "undefined") {
 		console.log(req.body);
 		
 		for (var key in req.body.local) {
@@ -137,7 +145,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.put('/', function(req, res, next) {
-		if (req.body.adminPW == "njmelee") {
+		if (req.session.admin) {
 			console.log(req.body);
 			
 			renderAdminPage(req, res, next);

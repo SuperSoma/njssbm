@@ -5,12 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
 var addRouter = require('./routes/add');
 
 var app = express();
+var session = require('express-session');
 
 //set up database
 mongoose.connect('mongodb://nickz:sc00terj@ds161322.mlab.com:61322/heroku_4vsk7dcm',{ useNewUrlParser: true });
@@ -28,6 +30,10 @@ var social = require('./models/socialModel.js');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(session({
+	secret : 'njsmash',
+	resave : true
+}))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
