@@ -151,20 +151,45 @@ function renderEditPage(req,res,next) {
 router.get("/edit/:type/:id", function(req, res, next) {
 	switch(req.params.type) {
 		case "local":
-		locals.findOne({"_id" : key}).exec(function(err,loc) {
+		locals.findOne({"_id" : req.params.id}).exec(function(err,loc) {
 			if (err) console.log(err);
 			var data = {};
 			data.eventName = loc.eventName;
-			//data.frequency = loc.fre
+			data.frequencyReal = loc.frequency == 604800 ? 'weekly' : 'biweekly';
+			data.description = loc.description;
+			data.id = loc._id;
+			var d = new Date(loc.startDate * 1000);
+			data.startDate = d.getUTCFullYear() + '-' + (d.getUTCMonth() + 1) + '-' + (d.getUTCDate());
+			
+			res.render('edit', { type : "local",data : data	});
 		});
 		break;
 		
 		case "event":
-		
+		events.findOne({"_id" : req.params.id}).exec(function(err,ev) {
+			if (err) console.log(err);
+			var data = {};
+			data.eventName = ev.eventName;
+			data.description = ev.description;
+			data.id = ev._id;
+			data.page = ev.pageLink;
+			var d = new Date(ev.date * 1000);
+			data.date = d.getUTCFullYear() + '-' + (d.getUTCMonth() + 1) + '-' + (d.getUTCDate());
+			
+			res.render('edit', { type : "local",data : data	});			
+		});
 		break;
 		
 		case "social":
-		
+		social.findOne({"_id" : req.params.id}).exec(function(err,socia) {
+			if (err) console.log(err);			
+			var data = {};
+			data.id = socia._id;
+			data.pageName = socia.pageName;
+			data.url = socia.url;
+			data.pType = socia.pageType;
+			res.render('edit', { type : "local",data : data	});
+		});
 		break;
 		
 		default:
@@ -173,8 +198,59 @@ router.get("/edit/:type/:id", function(req, res, next) {
 	}
 });
 
-router.post("/edit/", function(req,res,next) {
-	
+router.post("/edit", function(req,res,next) {
+		switch(req.body.type) {
+			case "local":
+				var d = new Date(req.body.startDate).getTime();
+				var unixDateTime =Math.round(d / 1000)
+				var fr = req.body.frequency == "weekly" ? 604800 : 1209600;
+				name = req.body.eventName;
+				locals.updateOne({"_id" : req.body.id},{
+					eventName : req.body.eventName,
+					frequency : fr,
+					startDate : unixDateTime,
+					description : req.body.description
+				}, 
+				{},
+				function(err,doc) {
+					if (err) {console.log(err)}
+					res.render("Submitted");
+				});
+				//locals.update({"_id" : req.body.}, {active: true}, {}, function(err,doc) {if (err) {console.log(err)}});
+			break;
+			
+			case "event":
+				var d = new Date(req.body.startDate).getTime();
+				var unixDateTime =Math.round(d / 1000);
+				name = req.body.eventName;
+				events.updateOne({"_id" : req.body.id},{
+					eventName : req.body.eventName,
+					date : unixDateTime,
+					pageLink : req.body.page,
+					description : req.body.description
+				}, {},
+				function() {
+						if (err) {console.log(err)}
+						res.render("Submitted");				
+				});			
+			break;
+			
+			case "social":
+				social.updateOne({"_id" : req.body.id},{
+					pageName : req.body.pageName,
+					pageType : req.body.frequency,
+					url : req.body.page
+				}, {},
+				function() {
+						if (err) {console.log(err)}
+						res.render("Submitted");				
+				});			
+			break;
+			
+			default:
+				res.render('edit', {type:"blonko"});
+			break;
+		}
 });
 
 module.exports = router;
