@@ -28,8 +28,9 @@ block content
 		hr
 	else if type == 'event'
 		h2 Edit Event
-		form(name='localForm' action='/edit' method='post')
+		form(name='localForm' action='/admin/edit' method='post')
 			input(type='hidden' name='type' value='event')
+			input(type='hidden' name='id' value=data.id)
 			p
 				label Event Name
 				input(type='text' name='eventName' value=data.eventName required)
@@ -48,8 +49,9 @@ block content
 		hr
 	else if type == 'social'
 		h2 Edit Social Link
-		form(name='localForm' action='/edit' method='post')
+		form(name='localForm' action='/admin/edit' method='post')
 			input(type='hidden' name='type' value='social')
+			input(type='hidden' name='id' value=data.id)
 			p
 				label Page Name
 				input(type='text' name='pageName' value=data.pageName required)

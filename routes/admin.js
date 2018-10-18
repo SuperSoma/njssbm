@@ -161,7 +161,7 @@ router.get("/edit/:type/:id", function(req, res, next) {
 			var d = new Date(loc.startDate * 1000);
 			data.startDate = d.getUTCFullYear() + '-' + (d.getUTCMonth() + 1) + '-' + (d.getUTCDate());
 			
-			res.render('edit', { type : "local",data : data	});
+			res.render('edit', { type : req.params.type,data : data	});
 		});
 		break;
 		
@@ -176,7 +176,7 @@ router.get("/edit/:type/:id", function(req, res, next) {
 			var d = new Date(ev.date * 1000);
 			data.date = d.getUTCFullYear() + '-' + (d.getUTCMonth() + 1) + '-' + (d.getUTCDate());
 			
-			res.render('edit', { type : "local",data : data	});			
+			res.render('edit', { type : req.params.type,data : data	});			
 		});
 		break;
 		
@@ -188,7 +188,7 @@ router.get("/edit/:type/:id", function(req, res, next) {
 			data.pageName = socia.pageName;
 			data.url = socia.url;
 			data.pType = socia.pageType;
-			res.render('edit', { type : "local",data : data	});
+			res.render('edit', { type : req.params.type,data : data	});
 		});
 		break;
 		
@@ -199,6 +199,7 @@ router.get("/edit/:type/:id", function(req, res, next) {
 });
 
 router.post("/edit", function(req,res,next) {
+	var name = "";
 		switch(req.body.type) {
 			case "local":
 				var d = new Date(req.body.startDate).getTime();
@@ -229,7 +230,7 @@ router.post("/edit", function(req,res,next) {
 					pageLink : req.body.page,
 					description : req.body.description
 				}, {},
-				function() {
+				function(err, doc) {
 						if (err) {console.log(err)}
 						res.render("Submitted");				
 				});			
@@ -241,7 +242,7 @@ router.post("/edit", function(req,res,next) {
 					pageType : req.body.frequency,
 					url : req.body.page
 				}, {},
-				function() {
+				function(err, doc) {
 						if (err) {console.log(err)}
 						res.render("Submitted");				
 				});			

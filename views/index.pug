@@ -15,7 +15,7 @@ block content
 								div(class="card-header") #{local.eventName}
 								div(class="card-body")
 									p(class="card-text") 
-										pre #{local.description}
+										pre(style='max-height:200px;overflow-y:scroll') #{local.description}
 		div(class="col-md-4")
 			a(class="twitter-timeline" href="https://twitter.com/NjSsbm?ref_src=twsrc%5Etfw") Tweets by NjSsbm
 			script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
@@ -32,7 +32,7 @@ block content
 							p(class="cart-text")
 								a(href=evnt.pageLink target="_blank") Event Link
 							p(class="card-text") 
-								pre #{evnt.description}
+								pre(style='max-height:200px;overflow-y:scroll') #{evnt.description}
 	hr
 	h2 SOCIAL MEDIA
 	div(style="margin-left:20px" class="row")
