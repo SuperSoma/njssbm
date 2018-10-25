@@ -1,73 +1,72 @@
 extends layout
 
 block content
-	h1 Edit Event or Social Link
+	h1 Edit #{type}
 	hr
-	if type == 'local'
-		h2 Edit Local
-		form(name='localForm' action='/admin/edit' method='post')
-			input(type='hidden' name='type' value='local')
-			input(type='hidden' name='id' value=data.id)
-			p
-				label Event Name
-				input(type='text' name='eventName' value=data.eventName required)
-			p
-				label Frequency
-				select(name='frequency' value=data.frequencyReal required)
-					option(value='weekly', selected = data.frequencyReal  == 'weekly') Weekly
-					option(value='biweekly', selected = data.frequencyReal == 'biweekly') Biweekly
-			p
-				label Start Date
-				input(type='date' name='startDate' value=data.startDate required)
-			p
-				label Event Description
-				br
-				textarea(name='description') #{data.description}
-			p
-				input(type='submit' value='Edit Local')
-		hr
-	else if type == 'event'
-		h2 Edit Event
-		form(name='localForm' action='/admin/edit' method='post')
-			input(type='hidden' name='type' value='event')
-			input(type='hidden' name='id' value=data.id)
-			p
-				label Event Name
-				input(type='text' name='eventName' value=data.eventName required)
-			p
-				label Start Date
-				input(type='date' name='startDate' value=data.date required)
-			p
-				label Page Link (FB, etc)
-				input(type='text' name='page' value=data.page required)
-			p
-				label Event Description
-				br
-				textarea(name='description' required) #{data.description}
-			p
-				input(type='submit' value='Edit Event')
-		hr
-	else if type == 'social'
-		h2 Edit Social Link
-		form(name='localForm' action='/admin/edit' method='post')
-			input(type='hidden' name='type' value='social')
-			input(type='hidden' name='id' value=data.id)
-			p
-				label Page Name
-				input(type='text' name='pageName' value=data.pageName required)
-			p
-				label Page Link (FB, etc)
-				input(type='text' name='page' value=data.url required)
-			p
-				label Link Type
-				select(name='frequency' required)
-					option(value='Facebook', selected = data.pType  == 'Facebook') Facebook
-					option(value='Twitter', selected = data.pType  == 'Twitter') Twitter
-					option(value='Instagram', selected = data.pType  == 'Instagram') Instagram
-					option(value='Twitch', selected = data.pType  == 'Twitch') Twitch
-					option(value='Mixer', selected = data.pType  == 'Mixer') Mixer
-					option(value='YouTube', selected = data.pType  == 'YouTube') YouTube
-			p
-				input(type='submit' value='Edit Social Link')
-	else
-		h1 Someone messed up >:(
+	div.row
+		div(class='col-md-offset-2 col-md-8 addRows')
+			if type == 'local'
+				form(name='localForm' action='/admin/edit' method='post')
+					input(type='hidden' name='type' value='local')
+					input(type='hidden' name='id' value=data.id)
+					div(class='form-group')
+						label Event Name
+						input(type='text' name='eventName' class='form-control' value=data.eventName required)
+					div(class='form-group')
+						label Frequency
+						select(name='frequency' class='form-control' value=data.frequencyReal required)
+							option(value='weekly', selected = data.frequencyReal  == 'weekly') Weekly
+							option(value='biweekly', selected = data.frequencyReal == 'biweekly') Biweekly
+					div(class='form-group')
+						label Start Date
+						input(type='date' name='startDate' class='form-control' value=data.startDate required)
+					div(class='form-group')
+						label Event Description
+						br
+						textarea(name='description' class='form-control') #{data.description}
+					div(class='form-group')
+						input(type='submit' class='btn btn-primary' value='Edit Local')
+				hr
+			else if type == 'event'
+				form(name='localForm' action='/admin/edit' method='post')
+					input(type='hidden' name='type' value='event')
+					input(type='hidden' name='id' value=data.id)
+					div(class='form-group')
+						label Event Name
+						input(type='text' name='eventName' class='form-control' value=data.eventName required)
+					div(class='form-group')
+						label Start Date
+						input(type='date' name='startDate' class='form-control' value=data.date required)
+					div(class='form-group')
+						label Page Link (FB, etc)
+						input(type='text' name='page' class='form-control' value=data.page required)
+					div(class='form-group')
+						label Event Description
+						br
+						textarea(name='description' class='form-control' required) #{data.description}
+					div(class='form-group')
+						input(type='submit' class='btn btn-primary' value='Edit Event')
+				hr
+			else if type == 'social'
+				form(name='localForm' action='/admin/edit' method='post')
+					input(type='hidden' name='type' value='social')
+					input(type='hidden' name='id' value=data.id)
+					div(class='form-group')
+						label Page Name
+						input(type='text' name='pageName' class='form-control' value=data.pageName required)
+					div(class='form-group')
+						label Page Link (FB, etc)
+						input(type='text' name='page' class='form-control' value=data.url required)
+					div(class='form-group')
+						label Link Type
+						select(name='frequency' class='form-control' required)
+							option(value='Facebook', selected = data.pType  == 'Facebook') Facebook
+							option(value='Twitter', selected = data.pType  == 'Twitter') Twitter
+							option(value='Instagram', selected = data.pType  == 'Instagram') Instagram
+							option(value='Twitch', selected = data.pType  == 'Twitch') Twitch
+							option(value='Mixer', selected = data.pType  == 'Mixer') Mixer
+							option(value='YouTube', selected = data.pType  == 'YouTube') YouTube
+					div(class='form-group')
+						input(type='submit' class='btn btn-primary' value='Edit Social Link')
+			else
+				h1 Someone messed up >:(
