@@ -15,3 +15,7 @@ label{
 input, textarea, select {
 	margin-left : 15px;
 }
+
+.addRows label{
+	padding-left : 0!important;
+}
