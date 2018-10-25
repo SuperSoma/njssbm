@@ -159,8 +159,12 @@ router.get("/edit/:type/:id", function(req, res, next) {
 			data.description = loc.description;
 			data.id = loc._id;
 			var d = new Date(loc.startDate * 1000);
-			data.startDate = d.getUTCFullYear() + '-' + (d.getUTCMonth() + 1) + '-' + (d.getUTCDate());
-			
+			var mo = d.getUTCMonth() + 1;
+			mo = mo < 10 ? "0"+mo : mo;
+			var da = (d.getUTCDate());
+			da = da < 10 ? "0"+da : da;
+			data.startDate = d.getUTCFullYear() + '-' + mo + '-' + da;
+			console.log(data.startDate);
 			res.render('edit', { type : req.params.type,data : data	});
 		});
 		break;
@@ -174,8 +178,12 @@ router.get("/edit/:type/:id", function(req, res, next) {
 			data.id = ev._id;
 			data.page = ev.pageLink;
 			var d = new Date(ev.date * 1000);
-			data.date = d.getUTCFullYear() + '-' + (d.getUTCMonth() + 1) + '-' + (d.getUTCDate());
-			
+			var mo = d.getUTCMonth() + 1;
+			mo = mo < 10 ? "0"+mo : mo;
+			var da = (d.getUTCDate());
+			da = da < 10 ? "0"+da : da;
+			data.date = d.getUTCFullYear() + '-' + mo + '-' + da;
+			console.log(data.date);
 			res.render('edit', { type : req.params.type,data : data	});			
 		});
 		break;
