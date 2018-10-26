@@ -1,38 +1,42 @@
 extends layout
 
 block content
+	
 	div.row
 		div(class="col-md-8")
-			h2 LOCALS 
-				small events from #{beans[0].date} to #{beans[6].date}
-			div(style="margin-left:20px")
-				each day in beans
-					if day.evs.length 
-						h3 #{day.date}
-					each local in day.evs
-						div(class="col-md-4" style="display:inline-block")
-							div(class="card border-dark mb-3" style="margin-top:10px;")
-								div(class="card-header") #{local.eventName}
-								div(class="card-body")
-									p(class="card-text") 
-										pre(style='max-height:200px;overflow-y:scroll') #{local.description}
+			if beans.length
+				h2 LOCALS 
+					small events from #{beans[0].date} to #{beans[6].date}
+				div(style="margin-left:20px")
+					each day in beans
+						if day.evs.length 
+							h3 #{day.date}
+						each local in day.evs
+							div(class="col-md-4" style="display:inline-block")
+								div(class="card border-dark mb-3" style="margin-top:10px;")
+									div(class="card-header") #{local.eventName}
+									div(class="card-body")
+										p(class="card-text") 
+											pre(style='max-height:200px;overflow-y:scroll') #{local.description}
 		div(class="col-md-4")
 			a(class="twitter-timeline" href="https://twitter.com/NjSsbm?ref_src=twsrc%5Etfw") Tweets by NjSsbm
 			script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
 	if evos.length
 		hr
-		h2 EVENTS
-		div(style="margin-left:20px")
-			each evnt in evos
-				div(class="col-md-4" style="display:inline-block")
-					div(class="card border-dark mb-3" style="margin-top:10px;")
-						div(class="card-header") #{evnt.eventName}
-						div(class="card-body")
-							p(class="card-text") #{evnt.eventDate}
-							p(class="cart-text")
-								a(href=evnt.pageLink target="_blank") Event Link
-							p(class="card-text") 
-								pre(style='max-height:200px;overflow-y:scroll') #{evnt.description}
+		div.row
+			div(class="col-md-12")
+				h2 EVENTS
+				div(style="margin-left:20px")
+					each evnt in evos
+						div(class="col-md-4" style="display:inline-block")
+							div(class="card border-dark mb-3" style="margin-top:10px;")
+								div(class="card-header") #{evnt.eventName}
+								div(class="card-body")
+									p(class="card-text") #{evnt.eventDate}
+									p(class="cart-text")
+										a(href=evnt.pageLink target="_blank") Event Link
+									p(class="card-text") 
+										pre(style='max-height:200px;overflow-y:scroll') #{evnt.description}
 	hr
 	h2 SOCIAL MEDIA
 	div(style="margin-left:20px" class="row")
