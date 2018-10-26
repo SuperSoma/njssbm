@@ -11,13 +11,14 @@ block content
 					each day in beans
 						if day.evs.length 
 							h3 #{day.date}
-						each local in day.evs
-							div(class="col-md-4" style="display:inline-block")
-								div(class="card border-dark mb-3" style="margin-top:10px;")
-									div(class="card-header") #{local.eventName}
-									div(class="card-body")
-										p(class="card-text") 
-											pre(style='max-height:200px;overflow-y:scroll') #{local.description}
+						div.row
+							each local in day.evs
+								div(class="col-md-4" style="display:inline-block")
+									div(class="card border-dark mb-3" style="margin-top:10px;")
+										div(class="card-header") #{local.eventName}
+										div(class="card-body")
+											p(class="card-text") 
+												pre(style='max-height:200px;overflow-y:scroll') #{local.description}
 		div(class="col-md-4")
 			a(class="twitter-timeline" href="https://twitter.com/NjSsbm?ref_src=twsrc%5Etfw") Tweets by NjSsbm
 			script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
