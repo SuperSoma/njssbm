@@ -37,6 +37,9 @@ router.get('/', function(req, res, next) {
 			for (var j=0;j < darts.length;j++) {
 				if (((darts[j] /1000) - pLoc[i].startDate) % pLoc[i].frequency == 0) break;
 			}
+			
+			pLoc[i].description = pLoc[i].description.replace(/\n/g, "<br />");
+			
 			//console.log(j);
 			locs[j].evs.push(pLoc[i]);
 		}
@@ -47,6 +50,7 @@ router.get('/', function(req, res, next) {
 			for (var i=0;i < eventos.length;i++) {
 				var d = new Date(eventos[i].date * 1000)
 				eventos[i].eventDate = getDayOfWeek(d.getUTCDay()) + ", " + getMonth(d.getUTCMonth()) + " " + d.getUTCDate() + ", " + d.getUTCFullYear();
+				eventos[i].description = eventos[i].description.replace(/\n/g, "<br />");
 			}
 			
 			social.find({active:true}, function(err3, socs) {

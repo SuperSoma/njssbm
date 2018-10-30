@@ -1,0 +1,70 @@
+	div.row
+		div(class="col-md-8")
+			if beans.length
+				h2 LOCALS 
+					small events from #{beans[0].date} to #{beans[6].date}
+				div(style="margin-left:20px")
+					each day in beans
+						if day.evs.length 
+							h3 #{day.date}
+						div.row
+							each local in day.evs
+								div(class="col-md-4" style="display:inline-block")
+									div(class="card border-dark mb-3" style="margin-top:10px;")
+										div(class="card-header") #{local.eventName}
+										div(class="card-body")
+											p(class="card-text") 
+												p(style='max-height:200px;overflow-y:scroll') !{local.description}
+		div(class="col-md-4")
+			a(class="twitter-timeline" href="https://twitter.com/NjSsbm?ref_src=twsrc%5Etfw") Tweets by NjSsbm
+			script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
+	if evos.length
+		hr
+		div.row
+			div(class="col-md-12")
+				h2 EVENTS
+				div(style="margin-left:20px")
+					each evnt in evos
+						div(class="col-md-4" style="display:inline-block")
+							div(class="card border-dark mb-3" style="margin-top:10px;")
+								div(class="card-header") #{evnt.eventName} - #{evnt.eventDate}
+								div(class="card-body")
+									p(class="cart-text")
+										a(href=evnt.pageLink target="_blank") Event Link
+									p(class="card-text") 
+										p(style='max-height:200px;overflow-y:scroll') !{evnt.description}
+	hr
+	h2 SOCIAL MEDIA
+	div(style="margin-left:20px" class="row")
+
+		div(class="col-md-2" style="display:inline-block")
+			h3 Facebook
+			each fb in facebook
+				div
+					a(href=fb.url target="_blank") #{fb.pageName}
+
+		div(class="col-md-2" style="display:inline-block")
+			h3 Twitch
+			each fb in twitch
+				div
+					a(href=fb.url target="_blank") #{fb.pageName}
+		div(class="col-md-2" style="display:inline-block")
+			h3 Twitter
+			each fb in twitter
+				div
+					a(href=fb.url target="_blank") #{fb.pageName}
+		div(class="col-md-2" style="display:inline-block")
+			h3 YouTube
+			each fb in youtube
+				div
+					a(href=fb.url target="_blank") #{fb.pageName}
+		div(class="col-md-2" style="display:inline-block")
+			h3 Instagram
+			each fb in instagram
+				div
+					a(href=fb.url target="_blank") #{fb.pageName}
+		div(class="col-md-2" style="display:inline-block")
+			h3 Mixer
+			each fb in mixer
+				div
+					a(href=fb.url target="_blank") #{fb.pageName}

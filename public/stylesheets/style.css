@@ -19,3 +19,11 @@ input, textarea, select {
 .addRows label{
 	padding-left : 0!important;
 }
+
+.card-header:hover {
+	cursor : pointer;
+}
+
+.card a {
+	text-decoration : none!important;
+}
