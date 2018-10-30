@@ -3,7 +3,7 @@ extends layout
 block content
 	h1 NJ SSBM
 	div.row
-		div(class="col-md-4")
+		div(class="col-md-3")
 			h2 Social Media
 			div(class='card border-dark mb-3')
 				a(href="https://discord.gg/hmn7Gpr" target="_blank") 
@@ -44,7 +44,7 @@ block content
 					div(class='card border-dark mb-3')
 						a(href=fb.url target="_blank")
 							div(class="card-header") #{fb.pageName}
-		div(class="col-md-4")
+		div(class="col-md-3")
 			h2 Locals
 			h4 events from #{beans[0].date} to #{beans[6].date}
 			if beans.length
@@ -58,7 +58,7 @@ block content
 										p(style='max-height:200px;overflow-y:scroll') !{local.description}
 				else
 					p No upcoming locals :(
-		div(class="col-md-4")
+		div(class="col-md-3")
 			h2 Events
 			if evos.length
 				each evnt in evos
@@ -71,3 +71,6 @@ block content
 								p(style='max-height:200px;overflow-y:scroll') !{evnt.description}			
 			else
 				p No upcoming events :(	
+		div(class="col-md-3")
+			a(class="twitter-timeline" href="https://twitter.com/NjSsbm?ref_src=twsrc%5Etfw") Tweets by NjSsbm
+			script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
