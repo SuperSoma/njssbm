@@ -7,6 +7,8 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+var env = process.env.NODE_ENV || 'dev';
+
 var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
 var addRouter = require('./routes/add');
@@ -15,8 +17,13 @@ var app = express();
 var session = require('express-session');
 
 //set up database
-mongoose.connect('mongodb://nickz:sc00terj@ds161322.mlab.com:61322/heroku_4vsk7dcm',{ useNewUrlParser: true });
-mongoose.Promise = global.Promise;
+if (env == 'dev') {
+	mongoose.connect('mongodb://nick:sc00terj@ds161322.mlab.com:61322/heroku_4vsk7dcm',{ useNewUrlParser: true });
+	mongoose.Promise = global.Promise;
+} else {
+	mongoose.connect('mongodb://127.0.0.1:27017',{ useNewUrlParser: true });
+	mongoose.Promise = global.Promise;	
+}
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
