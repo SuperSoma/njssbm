@@ -57,7 +57,7 @@ router.get('/', function(req, res, next) {
 				if (err3) return console.log(err3);
 				
 				//['Facebook', 'Twitter', 'Instagram', 'Twitch', 'Mixer', 'YouTube']
-				var yt = [], tw = [], inst = [], mxr = [], fb = [], twtc = [];
+				var yt = [], tw = [], inst = [], mxr = [], fb = [], twtc = [], dc = [];
 				for (var i=0; i < socs.length; i++) {
 					switch (socs[i].pageType) {
 						case "Facebook":
@@ -78,10 +78,16 @@ router.get('/', function(req, res, next) {
 						case "YouTube":
 						yt.push(socs[i]);
 						break;
+						case "YouTube":
+						yt.push(socs[i]);
+						break;
+						case "Discord":
+						dc.push(socs[i]);
+						break;
 					}
 				}
 							
-				res.render('index', {beans : locs, evos : eventos, youtube : yt, twitter : tw, instagram : inst, twitch : twtc, mixer : mxr, facebook : fb});
+				res.render('index', {beans : locs, evos : eventos, youtube : yt, twitter : tw, instagram : inst, twitch : twtc, mixer : mxr, facebook : fb, discord : dc});
 			});
 		});
 	});

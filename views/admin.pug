@@ -124,7 +124,7 @@ block content
 				h4() Pending Social Links
 				each local in pSocial
 					p 
-						strong #{local.pageName} - #{local.url}
+						strong #{local.pageName} - #{local.pageType} - #{local.url}
 						span
 							label Approve
 							input(type='radio' name='social['+local._id+']' value='approve')
