@@ -1,3 +1,4 @@
+var dotEnv = require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -17,7 +18,7 @@ var app = express();
 var session = require('express-session');
 
 //set up database
-var connectURL = env == 'dev' ? 'mongodb://nickz:sc00terj@ds161322.mlab.com:61322/heroku_4vsk7dcm' : 'mongodb://127.0.0.1/njssbm';
+var connectURL = env == 'dev' ? process.env.DBDEV : process.env.DBCONN;
 mongoose.connect(connectURL,{ useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
